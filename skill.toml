@@ -1,0 +1,27 @@
+[skill]
+name = "knowledge-vault"
+version = "1.1.0"
+handler = "skills/knowledge_vault.py:handle"
+description = "File-system-backed knowledge base for agents. Markdown files with YAML frontmatter, git-versioned, multi-vault, Obsidian-compatible. Private by default — each node's vault is isolated."
+tags = ["memory", "knowledge", "storage", "vault", "rag", "notes"]
+
+[skill.schema]
+input  = {action = "string", path = "string", content = "string", query = "string", filter = "string", sort = "string", limit = "string", vault_name = "string", node_id = "string", permission = "string", visibility = "string", url = "string", description = "string"}
+output = {result = "string", status = "string", path = "string", vault = "string"}
+
+[skill.visibility]
+# "private" = local node only, not advertised on the DHT.
+# Change to "network" only if you intend to offer vault-as-a-service to other nodes.
+# WARNING: changing to "network" without understanding the ACL model is a security risk.
+default = "private"
+
+[skill.pricing]
+# Local calls are free. If you expose the skill on the network and want to charge,
+# set a price in network credits here.
+price = 0.0
+
+[requirements]
+# All core functionality uses Python stdlib only.
+# zvec enables semantic (vector) search — install separately if needed.
+packages = []
+optional = ["zvec"]
